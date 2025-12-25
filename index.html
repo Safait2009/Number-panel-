@@ -3,73 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FX TRADER BY SAFAIT</title>
+    <title>FX TRADER PREMIUM - SAFAIT</title>
     <style>
-        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        .hack-box { width: 340px; background: #000; border: 2px solid #ff00ff; border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(255, 0, 255, 0.6); position: relative; }
-        .header { background: #ff00ff; color: #000; font-weight: 900; padding: 8px; margin: -25px -25px 20px -25px; border-radius: 12px 12px 0 0; letter-spacing: 2px; text-transform: uppercase; }
-        #period { color: #ffff00; font-size: 13px; margin-bottom: 20px; font-family: monospace; }
-        .prediction-area { border: 1px solid #333; padding: 25px; border-radius: 15px; background: rgba(255, 255, 255, 0.03); }
-        #status { font-size: 11px; color: #00ff41; margin-bottom: 12px; font-weight: bold; letter-spacing: 1px; }
-        #prediction { font-size: 45px; font-weight: 900; margin: 0; letter-spacing: 3px; text-shadow: 0 0 20px #ff00ff; }
-        .btn-row { display: flex; justify-content: space-between; margin-top: 25px; }
-        .btn { background: #1a1a1a; padding: 12px 20px; border-radius: 8px; font-size: 12px; font-weight: bold; border: 1px solid #333; min-width: 70px; }
-        .dev-footer { margin-top: 30px; font-size: 18px; color: #00ff41; font-weight: 900; letter-spacing: 4px; border-top: 1px solid #222; padding-top: 15px; text-transform: uppercase; text-shadow: 0 0 10px #00ff41; }
-        .blink { animation: blinker 0.8s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0.3; } }
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .hack-box { width: 330px; background: #000; border: 2px solid #ff00ff; border-radius: 12px; padding: 25px; box-shadow: 0 0 40px rgba(255, 0, 255, 0.7); }
+        .header { background: #ff00ff; color: #000; font-weight: 900; padding: 10px; margin: -25px -25px 20px -25px; border-radius: 10px 10px 0 0; letter-spacing: 2px; }
+        #period { color: #ffff00; font-size: 14px; margin-bottom: 20px; font-weight: bold; font-family: monospace; }
+        .result-panel { border: 1px solid #333; padding: 30px 10px; border-radius: 15px; background: linear-gradient(180deg, #050505, #111); }
+        #status { font-size: 11px; color: #00ff41; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px; }
+        #prediction { font-size: 48px; font-weight: 900; color: #fff; margin: 0; text-shadow: 0 0 25px #ff00ff; }
+        .dev-name { margin-top: 35px; font-size: 20px; color: #00ff41; font-weight: 900; letter-spacing: 3px; border-top: 1px solid #222; padding-top: 15px; text-transform: uppercase; }
+        .blink { animation: blinker 0.6s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
 <div class="hack-box">
-    <div class="header">FX TRADER PRO <span class="blink">●</span></div>
-    <div id="period">Game Period : Loading...</div>
+    <div class="header">FX TRADER VIP <span class="blink">●</span></div>
+    <div id="period">SCANNING PERIOD...</div>
     
-    <div class="prediction-area">
-        <div id="status">INITIALIZING...</div>
+    <div class="result-panel">
+        <div id="status">CONNECTING SERVER...</div>
         <div id="prediction">WAIT</div>
     </div>
 
-    <div class="btn-row">
-        <div class="btn">EXIT</div>
-        <div class="btn" style="color: #ff00ff; border-color: #ff00ff;">CHANGE</div>
-        <div class="btn">HIDE</div>
-    </div>
-
-    <div class="dev-footer">DEVELOPER SAFAIT</div>
-    <div style="font-size: 9px; color: #444; margin-top: 10px;">AUTH BYPASS: 2009-SECURE-STRIKE</div>
+    <div class="dev-name">DEVELOPER SAFAIT</div>
+    <div style="font-size: 10px; color: #444; margin-top: 10px;">SECURE KEY: 2009-PRO</div>
 </div>
 
 <script>
     setInterval(() => {
         const now = new Date();
-        const s = now.getSeconds();
         const m = now.getMinutes();
-        const h = now.getHours();
+        const s = now.getSeconds();
         
-        // পিরিয়ড নম্বর জেনারেটর
-        let periodDate = now.toISOString().slice(0,10).replace(/-/g, "");
-        let currentPeriod = periodDate + "10001" + (h * 60 + m).toString().padStart(3, '0');
-        document.getElementById('period').innerText = "Game Period : " + currentPeriod;
+        // পিরিয়ড নম্বর ফরম্যাট ঠিক করা
+        let dateStr = now.getFullYear().toString() + (now.getMonth()+1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0');
+        let currentID = dateStr + "10001" + ((now.getHours() * 60) + m + 1).toString().padStart(4, '0');
+        document.getElementById('period').innerText = "Game Period : " + currentID;
 
-        if (s >= 40 || s <= 5) {
-            document.getElementById('status').innerText = "SIGNAL SECURED ✅ (BET NOW)";
-            calculateFX(m);
+        // ৪২ সেকেন্ডে সিগন্যাল লক হবে (১৮ সেকেন্ড সময় পাবেন)
+        if (s >= 42 || s <= 5) {
+            document.getElementById('status').innerText = "SIGNAL SECURED ✅";
+            document.getElementById('status').style.color = "#00ff41";
+            getPrediction(m);
         } else {
-            document.getElementById('status').innerText = "SYNCING WITH SERVER...";
+            document.getElementById('status').innerText = "ANALYZING TREND...";
             document.getElementById('status').style.color = "#ff003c";
             document.getElementById('prediction').innerText = "WAIT";
             document.getElementById('prediction').style.color = "#fff";
         }
     }, 1000);
 
-    function calculateFX(m) {
-        let seed = (m * 73) + 2009; 
-        let n1 = seed % 10;
-        let n2 = (n1 % 2 === 0) ? (n1 + 3) % 10 : (n1 + 7) % 10;
+    function getPrediction(m) {
+        // সাফায়েত ভাইর ২০০৯ লজিক - একদম নতুন ইকুয়েশন
+        let secretFactor = (m * 83) + 2009;
+        let n1 = secretFactor % 10;
+        
+        // স্মার্ট নম্বর লজিক: ক্যাসিনো প্যাটার্ন অনুযায়ী ২য় নম্বর নির্বাচন
+        let n2 = (n1 >= 5) ? (n1 - 3) : (n1 + 3);
         let size = (n1 >= 5) ? "BIG" : "SMALL";
         
-        document.getElementById('status').style.color = "#00ff41";
         document.getElementById('prediction').innerText = size + " " + n1 + " " + n2;
         document.getElementById('prediction').style.color = (size === "BIG") ? "#00ff41" : "#ffcc00";
     }
